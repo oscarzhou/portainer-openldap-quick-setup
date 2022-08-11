@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  ldap_server:
+    image: osixia/openldap:1.5.0
+    container_name: ldap_server
+    environment:
+      LDAP_ADMIN_PASSWORD: admin_pass
+      LDAP_BASE_DN: dc=example,dc=org
+      LDAP_DOMAIN: example.org
+      LDAP_ORGANISATION: "Example Inc."
+      LDAP_TLS_CRT_FILENAME: server.pem
+      LDAP_TLS_KEY_FILENAME: server-key.pem
+      LDAP_TLS_CA_CRT_FILENAME: ldap-ca.pem
+      LDAP_TLS_VERIFY_CLIENT: try
+    hostname: ldap.example.org
+    command: --copy-service
+    networks:
+      default:
+        ipv4_address: 172.31.0.10
+    ports:
+      - 389:389
+      - 636:636
+    volumes:
+      - ./data/bootstrap.ldif:/container/service/slapd/assets/config/bootstrap/ldif/50-bootstrap.ldif
+      - ./data/certs:/container/service/slapd/assets/certs 
+
+  ldap_server_admin:
+    image: osixia/phpldapadmin:0.7.2
+    container_name: ldap_server_admin
+    ports:
+      - 8090:80
+    networks:
+      default:
+        ipv4_address: 172.31.0.2
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: ldap_server
+      PHPLDAPADMIN_HTTPS: 'false'
+
+networks:
+  default:
+    external: false
+    name: openldap-network
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.31.0.1/16"
