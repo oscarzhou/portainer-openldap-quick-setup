@@ -127,5 +127,7 @@ ${TEST_IMAGE}
 
 print_highlight "Portainer run up successfully."
 
+sleep 8
+
 xdg-open http://localhost:9000
 
