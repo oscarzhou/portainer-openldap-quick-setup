@@ -64,7 +64,7 @@ if [ $? == 0 ]; then
     print_highlight "removing existing container ldap_server_admin"
 fi
 
-docker network ls -a | grep 'openldap-network' &> /dev/null
+docker network ls | grep 'openldap-network' &> /dev/null
 if [ $? == 0 ]; then
     docker network rm openldap-network
     print_highlight "removing existing container openldap-network"
