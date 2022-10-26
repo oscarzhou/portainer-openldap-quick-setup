@@ -27,3 +27,22 @@ After the output `Portainer run up successfully` shows up, it may take a while f
 | password1  | developer_pass  |
 | username2  | maintainer  |
 | password2  | maintainer_pass  |  
+
+
+## 3. How to configure on Portainer LDAP page?  
+
+:exclamation: Note that if you want to display group, you'll need to select custom server type instead of OpenLDAP on Portainer page.  
+
+### 3.1. Configure Connection
+
+![ldap-configuration-1](/images/ldap-configuration-1.PNG)
+
+### 3.2. Configure Users  
+
+![ldap-configuration-2](/images/ldap-configuration-2.PNG)
+![ldap-configuration-3](/images/ldap-configuration-3.PNG)
+
+### 3.2. Configure Groups
+
+![ldap-configuration-4](/images/ldap-configuration-4.PNG)
+![ldap-configuration-5](/images/ldap-configuration-5.PNG)

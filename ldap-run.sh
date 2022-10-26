@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -eu
-
 ERROR_COLOR='\033[0;31m';
 HIGHLIGHT_COLOR='\033[0;32m';
 INPUT_COLOR='\033[0;33m';
@@ -28,15 +26,14 @@ KEY_FILE=./data/certs/server-key.pem
 
 print_highlight "Start setup ldap service..."
 
-docker-compose -v | grep 'docker-compose version' &> /dev/null
+docker-compose -v | grep 'docker-compose version|Docker Compose version' &> /dev/null
 if [ $? != 0 ]; then
-    print_error "docker-compose not detected"
+    print_error "docker compose not detected"
     exit;
 fi
 
-print_highlight "docker-compose detected" &> /dev/null
+print_highlight "docker compose detected" &> /dev/null
 
-set +e
 docker container ls -a | grep 'portainer_ldap' &> /dev/null
 if [ $? == 0 ]; then
     docker stop portainer_ldap
@@ -106,9 +103,7 @@ print_highlight "Password: admin_pass"
 
 sleep 5
 
-xdg-open http://localhost:8090
-
-sleep 5
+input "Visit LDAP page with 'http://localhost:8090'. Continue(y/n)? " TEST_NEXT
 
 input "Input your testing docker image(portainerci/portainer-ee:prxxx): " TEST_IMAGE
 
@@ -129,5 +124,5 @@ print_highlight "Portainer run up successfully."
 
 sleep 8
 
-xdg-open http://localhost:9000
+print_highlight "Visit Portainer page with 'http://localhost:9000'. "
 
