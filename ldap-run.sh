@@ -26,7 +26,7 @@ KEY_FILE=./data/certs/server-key.pem
 
 print_highlight "Start setup ldap service..."
 
-docker-compose -v | grep 'docker-compose version|Docker Compose version' &> /dev/null
+command -v docker-compose &> /dev/null
 if [ $? != 0 ]; then
     print_error "docker compose not detected"
     exit;

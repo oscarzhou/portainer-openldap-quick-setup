@@ -35,14 +35,37 @@ After the output `Portainer run up successfully` shows up, it may take a while f
 
 ### 3.1. Configure Connection
 
+| Key  | Value  | 
+|---|---|
+| LDAP Server   | 172.31.0.10:389 |
+| Reader DN   | cn=admin,dc=example,dc=org |
+| Password   | admin_pass |
+
 ![ldap-configuration-1](/images/ldap-configuration-1.PNG)
 
 ### 3.2. Configure Users  
+
+
+| Key  | Value  | 
+|---|---|
+| Base DN 1   | cn=maintainer,dc=example,dc=org |
+| Username attribute 1  | uid |
+| Base DN 2   | cn=developer,dc=example,dc=org |
+| Username attribute 2  | uid |
 
 ![ldap-configuration-2](/images/ldap-configuration-2.PNG)
 ![ldap-configuration-3](/images/ldap-configuration-3.PNG)
 
 ### 3.2. Configure Groups
+
+| Key  | Value  | 
+|---|---|
+| Group Base DN 1   | cn=Maintainers,ou=Groups,dc=example,dc=org |
+| Group Membership Attribute 1  | uniqueMember |
+| Group Filter 1   | (objectClass=groupOfUniqueNames) |
+| Group Base DN 2   | cn=Admins,ou=Groups,dc=example,dc=org |
+| Group Membership Attribute 2  | uniqueMember |
+| Group Filter 2   | (objectClass=groupOfUniqueNames) |
 
 ![ldap-configuration-4](/images/ldap-configuration-4.PNG)
 ![ldap-configuration-5](/images/ldap-configuration-5.PNG)
